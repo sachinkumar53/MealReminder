@@ -9,21 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MealReminder">
-        <receiver
-            android:name=".receiver.ReminderReceiver"
-            android:enabled="true"
-            android:exported="true"></receiver>
 
         <activity
-            android:name=".ui.MealActivity"
-            android:theme="@style/MealTheme" />
-        <activity android:name=".ui.MainActivity">
+            android:name=".ui.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

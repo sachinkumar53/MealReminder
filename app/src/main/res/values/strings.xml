@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Meal Reminder</string>
+    <string name="menu_item_format">\u2022 %s</string>
+    <string name="today_s_meals">Today\'s meals</string>
+    <string name="other">Other</string>
+    <string name="now">Now</string>
 </resources>

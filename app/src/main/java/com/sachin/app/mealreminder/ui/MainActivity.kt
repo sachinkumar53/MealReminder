@@ -1,24 +1,64 @@
 package com.sachin.app.mealreminder.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.sachin.app.mealreminder.modal.MealCard
-import com.sachin.app.mealreminder.R
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.view.children
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.sachin.app.mealreminder.databinding.ActivityMainBinding
+import com.sachin.app.mealreminder.model.getNow
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val cards = arrayListOf<MealCard>()
-        cards.add(MealCard("Breakfast", R.drawable.ic_breakfast_1, R.color.green, 570))
-        cards.add(MealCard("Lunch", R.drawable.ic_omelette, R.color.orange, 810))
-        cards.add(MealCard("Breakfast", R.drawable.ic_pizza, R.color.blue, 1140))
-        cards.add(MealCard("Dinner", R.drawable.ic_indian_food, R.color.red, 1230))
+        binding.viewPager.apply {
+            offscreenPageLimit = 1
+            adapter = PageAdapter(this@MainActivity)
+        }
 
-        main_listview.adapter = CardAdapter(cards)
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = getTabTitleByPosition(position)
+        }.attach()
+
+        showWish()
+
+        binding.fab.setOnClickListener {
+            binding.viewPager.apply {
+                if (currentItem < 6)
+                    currentItem += 1
+                else currentItem = 0
+            }
+        }
     }
 
+    @SuppressLint("SimpleDateFormat")
+    private fun getTabTitleByPosition(position: Int): String = when (position) {
+        0 -> "Today's meal"
+        1 -> "Tomorrow"
+        else -> {
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DAY_OF_MONTH, position)
+            SimpleDateFormat("dd MMMM").format(calendar.time).toString()
+        }
+    }
+
+
+    @SuppressLint("DefaultLocale")
+    private fun showWish() {
+        binding.wishTextView.text =
+            String.format("Good %s,", getNow().name.toLowerCase().capitalize())
+    }
 
 }
