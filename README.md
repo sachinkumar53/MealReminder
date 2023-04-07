@@ -13,9 +13,8 @@ The interface of the app is user-friendly and simple to navigate. It offers an o
 - Uses Room Database to save menu information
 
 
-## Screenshots
-<img src="https://github.com/sachinkumar53/MealReminder/blob/master/screenshots/Meal%20Reminder_1.jpg" alt="Screenshot 1" width="25%"/>
-<img src="https://github.com/sachinkumar53/MealReminder/blob/master/screenshots/Meal%20Reminder_2.jpg" alt="Screenshot 2" width="25%"/>
+## Screenshot
+<img src="https://github.com/sachinkumar53/MealReminder/blob/master/screenshots/Meal%20Reminder_1.jpg" alt="Screenshot 1" width="30%"/>
 
 
 ## Contribution
